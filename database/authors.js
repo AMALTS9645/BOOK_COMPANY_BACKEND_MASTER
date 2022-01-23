@@ -9,4 +9,3 @@ const AuthorSchema = mongoose.Schema({
 const AuthorModel = mongoose.model("authors", AuthorSchema);
 //"Authors" is the collection name in mongodb
 module.exports = AuthorModel;
- 

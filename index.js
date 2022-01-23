@@ -46,17 +46,40 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true}).the
 // }
 // main();
 
+
+
+
+//  GET APIS
+
+
 // http://localhost:3000/
 app.get("/", (req, res) => {
     return res.json({"WELCOME": `to my Backend Software for the Book Company`});
 });
 
+
+/*
+Route           /
+Description     Get all books
+Access          PUBLIC
+Parameter       NONE
+Methods         GET
+*/
 // http://localhost:3000/books
 app.get("/books", async (req, res) => {
     const getAllBooks = await BookModel.find();
     return res.json(getAllBooks);
 });
 
+
+
+/*
+Route           /book-isbn/:isbn
+Description     Get specific books based on ISBN
+Access          PUBLIC
+Parameter       isbn
+Methods         GET
+*/
 // http://localhost:3000/book-isbn/1234Three
 app.get("/book-isbn/:isbn", async (req, res) => {
     // console.log(req.params);
@@ -71,6 +94,14 @@ app.get("/book-isbn/:isbn", async (req, res) => {
     return res.json(getSpecificBook);
 });
 
+
+/*
+Route           /book-category/:category
+Description     Get specific books based on category
+Access          PUBLIC
+Parameter       category
+Methods         GET
+*/
 // http://localhost:3000/book-category/programming
 app.get("/book-category/:category", async (req, res) => {
     // // console.log(req.params);
@@ -85,12 +116,29 @@ app.get("/book-category/:category", async (req, res) => {
     return res.json(getSpecificBooks);
 });
 
+
+/*
+Route           /authors
+Description     get all authors
+Access          PUBLIC
+Parameter       NONE
+Methods         GET
+*/
 // http://localhost:3000/authors
 app.get("/authors", async (req, res) => {
     const getAllAuthors = await AuthorModel.find();
     return res.json(getAllAuthors);
 });
 
+
+
+/*
+Route           /author-id/:id
+Description     get all authors based on author id
+Access          PUBLIC
+Parameter       id
+Methods         GET
+*/
 // http://localhost:3000/author-id/1
 app.get("/author-id/:id", async (req, res) => {
 // console.log(req.params);
@@ -105,6 +153,15 @@ if(getSpecificAuthor===null) {
 return res.json(getSpecificAuthor);
 });
 
+
+
+/*
+Route           /author-isbn/:isbn
+Description     get all authors based on author isbn
+Access          PUBLIC
+Parameter       isbn
+Methods         GET
+*/
 // http://localhost:3000/author-isbn/12One
 app.get("/author-isbn/:isbn", async (req, res) => {
 // // console.log(req.params);
@@ -119,12 +176,28 @@ if(getSpecificAuthors.length===0) {
 return res.json(getSpecificAuthors);
 });
 
+
+/*
+Route           /publications
+Description     get all publications
+Access          PUBLIC
+Parameter       NONE
+Methods         GET
+*/
 // http://localhost:3000/publications
 app.get("/publications", async (req, res) => {
     const getAllPublications = await PublicationModel.find();
     return res.json(getAllPublications);
 });
 
+
+/*
+Route           /publication-id/:id
+Description     get all publications based on books id
+Access          PUBLIC
+Parameter       id
+Methods         GET
+*/
 // http://localhost:3000/publication-id/1
 app.get("/publication-id/:id", async (req, res) => {
     // console.log(req.params);
@@ -141,6 +214,15 @@ return res.json(getSpecificPublications);
 
 
 
+//  POST APIS
+
+/*
+Route           /book
+Description     add new book
+Access          PUBLIC
+Parameter       NONE
+Methods         POST
+*/
 // http://localhost:3000/book
 app.post("/book", async (req, res) => {
     // console.log(req.body);
@@ -148,6 +230,14 @@ app.post("/book", async (req, res) => {
     return res.json({bookAdded: addNewBook,message: "Book was added !!!" });
 });
 
+
+/*
+Route           /author
+Description     add new author
+Access          PUBLIC
+Parameter       NONE
+Methods         POST
+*/
 // http://localhost:3000/author 
 app.post("/author", async (req, res) => {
     // console.log(req.body);
@@ -155,6 +245,14 @@ app.post("/author", async (req, res) => {
     return res.json({AuthorAdded: addNewAuthor,message: "Author was added !!!" });
 });
 
+
+/*
+Route           /publication
+Description     add new publication
+Access          PUBLIC
+Parameter       NONE
+Methods         POST
+*/
 // http://localhost:3000/publication
 app.post("/publication", async (req, res) => {
     // console.log(req.body);
@@ -163,6 +261,16 @@ app.post("/publication", async (req, res) => {
 });
 
 
+
+// PUT APIS
+
+/*
+Route           /book/book-update/:isbn
+Description     Update book details
+Access          PUBLIC
+Parameter       isbn
+Methods         PUT
+*/
 // http://localhost:3000/book-update/12345ONE
 app.put("/book-update/:isbn", async (req, res) => {
     // console.log(req.body);
@@ -172,6 +280,14 @@ app.put("/book-update/:isbn", async (req, res) => {
     return res.json({bookUpdated:updateBook, message:"Book was updated"});
 });
 
+
+/*
+Route           /book/author-update/:id
+Description     Update author details
+Access          PUBLIC
+Parameter       id
+Methods         PUT
+*/
 // http://localhost:3000/author-update/1
 app.put("/author-update/:id", async (req, res) => {
     // console.log(req.body);
@@ -181,6 +297,14 @@ app.put("/author-update/:id", async (req, res) => {
     return res.json({AuthorUpdated:updateAuthor, message:"Author was updated"});
 });
 
+
+/*
+Route           /book/publication-update/:id
+Description     Update publication details
+Access          PUBLIC
+Parameter       id
+Methods         PUT
+*/
 // http://localhost:3000/publication-update/1
 app.put("/publication-update/:id", async (req, res) => {
     // console.log(req.body);
@@ -191,6 +315,17 @@ app.put("/publication-update/:id", async (req, res) => {
 });
 
 
+
+// DELETE APIS
+
+
+/*
+Route           /book-delete/:isbn
+Description     delete book with isbn
+Access          PUBLIC
+Parameter       isbn
+Methods         DELETE
+*/
 // http://localhost:3000/book-delete/12345ONE
 app.delete("/book-delete/:isbn", async (req, res) => {
     // console.log(req.params);
@@ -199,6 +334,14 @@ app.delete("/book-delete/:isbn", async (req, res) => {
     return res.json({bookDeleted: deleteBook,message:"Book was deleted"});
 });
 
+
+/*
+Route           /book-author-delete/:isbn/:id
+Description     delete author from book
+Access          PUBLIC
+Parameter       isbn, id
+Methods         DELETE
+*/
 // http://localhost:3000/book-author-delete/12One/1
 app.delete("/book-author-delete/:isbn/:id", async (req, res) => {
     // console.log(req.params);
@@ -213,19 +356,36 @@ app.delete("/book-author-delete/:isbn/:id", async (req, res) => {
         return res.json({bookUpdated: updateBook, message:"Author was deleted From the Book!!!"});
     }   
 });
-  
 
 
-// http://localhost:3000/author-book-delete/1/12345ONE
-app.delete("/author-book-delete/:id/:isbn", (req, res) => {
-});
-
+/*
+Route           /author-delete/:id
+Description     delete author
+Access          PUBLIC
+Parameter       id
+Methods         DELETE
+*/
 // http://localhost:3000/author-delete/12345ONE
 app.delete("/author-delete/:id", (req, res) => {
+        const { id } = req.params;
+        const deleteBook = await AuthorModel.deleteOne({ id: id }); //checks the respective isbn
+        return res.json({ bookdeleted: deleteBook, message: "Author was deleted!!!" });
 });
 
+
+/*
+Route           /publication-delete/:id
+Description     delete publication
+Access          PUBLIC
+Parameter       id
+Methods         DELETE
+*/
 // http://localhost:3000/publication-delete/12345ONE
 app.delete("/publication-delete/:id", (req, res) => {
+    const { id } = req.params;
+  //const { isbn } = req.params;
+  const deleteBook = await PublicationModel.deleteOne({ id: id }); //checks the respective isbn
+  return res.json({ bookdeleted: deleteBook, message: "publication was deleted!!!" });
 });
 
 app.listen(3000, () => {
