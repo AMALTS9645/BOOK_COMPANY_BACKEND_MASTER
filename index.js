@@ -365,8 +365,8 @@ Access          PUBLIC
 Parameter       id
 Methods         DELETE
 */
-// http://localhost:3000/author-delete/12345ONE
-app.delete("/author-delete/:id", (req, res) => {
+// http://localhost:3000/author-delete/2
+app.delete("/author-delete/:id",async (req, res) => {
         const { id } = req.params;
         const deleteBook = await AuthorModel.deleteOne({ id: id }); //checks the respective isbn
         return res.json({ bookdeleted: deleteBook, message: "Author was deleted!!!" });
@@ -380,8 +380,8 @@ Access          PUBLIC
 Parameter       id
 Methods         DELETE
 */
-// http://localhost:3000/publication-delete/12345ONE
-app.delete("/publication-delete/:id", (req, res) => {
+// http://localhost:3000/publication-delete/7
+app.delete("/publication-delete/:id",async (req, res) => {
     const { id } = req.params;
   //const { isbn } = req.params;
   const deleteBook = await PublicationModel.deleteOne({ id: id }); //checks the respective isbn
